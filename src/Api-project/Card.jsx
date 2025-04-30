@@ -23,14 +23,19 @@ function Card({formData}) {
         
        }
        catch(e){
-         console.log(e);
+         if(e.response && e.response.status===404){
+            setData([]);
+         }
+         else{
+            console.log(e);
+         }
        }
        finally{
         setLoading(false);
        }
     }
     
-    console.log( "length " + data.length);
+     console.log(data);
     useEffect(()=>{
         fetchapi();
     },[count,name,gender,status])
@@ -53,30 +58,39 @@ function Card({formData}) {
    
   return (
     <div className='max-w-[1220px] mx-auto px-3'>
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 '>
-            {
-                data.map((item,i)=>(
-                  
-                         <div key={i} className='flex flex-col px-4  pb-3 pt-4 border border-neutral-500'>
-                        <div className='mb-6' >
-                        
-                         <img src={item.image} alt="image" className='rounded-xl'  />  
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 justify-center   '>
+           {
+            data.length===0 && !loading ?(
+                <p className='text-center text-red-600'>
+                    No such Character
+                </p>
+
+            ):(
+                
+                    data.map((item,i)=>(
+                      
+                             <div key={i} className='flex flex-col px-4  pb-3 pt-4 border border-neutral-500 items-center '>
+                            <div className='mb-6' >
                             
+                             <img src={item.image} alt="image" className='rounded-xl'  />  
+                                
+                            </div>
+                            <div className='flex-col gap-3'>
+                                <h1 className='text-xl text-black mb-3 font-bold'>{item.name}</h1>
+                                <p> Status: {item.status}</p>
+                                <p> Gender: {item.gender}</p>
+    
+    
+                            </div>
+    
                         </div>
-                        <div className='flex-col gap-3'>
-                            <h1 className='text-xl text-black mb-3 font-bold'>{item.name}</h1>
-                            <p> Status: {item.status}</p>
-                            <p> Gender: {item.gender}</p>
-
-
-                        </div>
-
-                    </div>
-
-                  
-                   
-                ))
-            }
+    
+                      
+                       
+                    ))
+                
+            )
+           }
 
 
         </div>
