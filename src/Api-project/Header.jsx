@@ -34,8 +34,8 @@ const Header = () => {
         <div className='w-full mb-5'>
             <h1 className='text-2xl font-bold tracking-widest text-center '>Rick & Mprthy Character Explorer</h1>
 
-           <div className=' flex flex- items-center gap-2 '>
-           <form onSubmit={handleSubmit} className='flex  mt-6  md:justify-center gap-3.5'>
+           <div className=' flex flex-col sm:flex-row items-center gap-2 '>
+           <form onSubmit={handleSubmit} className='flex  flex-wrap sm:flex-row mt-6  md:justify-center gap-3.5'>
                 <input type="text" placeholder='Search by name ' className='px-2 py-3 ring-1 ring-offset-neutral-500 rounded   '  name="name" value={formData.name} onChange={handleChange} />
                 <select name="status" className='px-2 py-3 ring-1 ring-offset-neutral-500 rounded text-neutral-500' value={formData.status} onChange={handleChange} >
                     <option value="All">All</option>
